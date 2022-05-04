@@ -141,8 +141,8 @@
 //	return 0;
 //}
 
-#include <iostream>
-using namespace std;
+//#include <iostream>
+//using namespace std;
 
 //全缺省参数
 //void TestA(int a = 5, int b = 10, int c = 15)
@@ -153,21 +153,76 @@ using namespace std;
 //}
 
 //半缺省参数（缺省部分参数）
-void TestA(int a , int b = 10, int c = 15)
-{
-	cout << "a = " << a << endl;
-	cout << "b = " << b << endl;
-	cout << "c = " << c << endl << endl;
-}
-
-int main()
-{
-	TestA(1);
-	TestA(1,5);
-	TestA(1,5,6);
-	return 0;
-}
+//void TestA(int a , int b = 10, int c = 15)
+//{
+//	cout << "a = " << a << endl;
+//	cout << "b = " << b << endl;
+//	cout << "c = " << c << endl << endl;
+//}
+//
+//int main()
+//{
+//	TestA(1);
+//	TestA(1,5);
+//	TestA(1,5,6);
+//	return 0;
+//}
 
 //函数重载
 //是函数的一种特殊情况，C++允许在同一作用域中声明几个功能类似的同名函数，这些同名函数的
 //形参列表(参数个数 或 类型 或 顺序)必须不同，常用来处理实现功能类似数据类型不同的问题
+
+#include <iostream>
+using namespace std;
+
+//void Swap(int* a,int* b)
+//{
+//	int tmp = *b;
+//	*b = *a;
+//	*a = tmp;
+//}
+//
+//void Swap(double* a, double* b)
+//{
+//	double tmp = *b;
+//	*b = *a;
+//	*a = tmp;
+//}
+
+
+int Add(int left, int right)
+{
+	return left + right;
+}
+
+double Add(double left, double right)
+{
+	return left + right;
+}
+
+
+int main()
+{
+	cout << Add(1,2) << endl;
+	cout << Add(1.3, 2.4) << endl;
+	return 0;
+}
+
+//#include <stdio.h>
+//
+//int Add(int left, int right)
+//{
+//	return left + right;
+//}
+
+//double Add(double left, double right)
+//{
+//	return left + right;
+//}
+
+
+//int main()
+//{
+//	Add(1,2);
+//	return 0;
+//}
