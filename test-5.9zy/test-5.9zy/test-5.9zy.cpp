@@ -10,28 +10,97 @@
 #include <iostream>
 using namespace std;
 
+
 // 一个变量可以有多个引用
 void TestRef()
 {
+
+	//int& a;
+
 	int a = 10;
-	int& b = a;//<====定义引用类型
+	int& b = a;
 	int& c = b;
 	int& d = c;
+
+	//再次定义一个变量
+	int f = 5;
+	//令别名b指向f ？？
+	b = f;
 }
+
+
+
 
 //常引用
 //权限缩放问题
-void TestConstRef()
+//void TestConstRef()
+//{
+//	const int a = 10;
+//
+//	// 权限放大，a为常量，不能引用别名
+//	/*int& ra = a; */
+//
+//	//权限相等的操作
+//	//const int& ra = a;
+//
+//	//权限缩小
+//	int c = 5;
+//	const int& d = c;
+//	const int& f = d;
+//}
+
+
+//void TestConstRef()
+//{
+//	const int& a = 10;
+//
+//	double b = 2.2;
+//	const int& c = b;
+//}
+
+//void Swap(int& left, int& right)
+//{
+//	int temp = left;
+//	left = right;
+//	right = temp;
+//}
+//
+//void Swap(double& left, double& right)
+//{
+//	double temp = left;
+//	left = right;
+//	right = temp;
+//}
+
+//int main()
+//{
+//	int a = 5, b = 3;
+//	Swap(a,b);
+//	double c = 2.3, d = 5.5;
+//	Swap(c,d);
+//	return 0;
+//}
+
+int& Count()
 {
-	const int a = 10;
-	//int& ra = a; // 该语句编译时会出错，a为常量
-	const int& ra = a;
-	// int& b = 10; // 该语句编译时会出错，b为常量
-	const int& b = 10;
-	double d = 12.34;
-	//int& rd = d; // 该语句编译时会出错，类型不同
-	const int& rd = d;
+	static int n = 5;
+	n++;
+	cout << &n << endl;
+	return n;
+}
+
+int main()
+{
+	int& ret = Count();
+	cout << ret << endl;
+	cout << &ret << endl;
+	//再次调用，同样的地址，不同的数据
+	cout << ret << endl;
+	cout << &ret << endl;
+
+	return 0;
 }
 
 
-#define Add(x,y) x+y
+
+//#define Add(x,y) x+y
