@@ -81,22 +81,35 @@ void TestRef()
 //	return 0;
 //}
 
-int& Count()
-{
-	static int n = 5;
-	n++;
-	cout << &n << endl;
-	return n;
-}
+//int& Count()
+//{
+//	static int n = 5;
+//	n++;
+//	cout << &n << endl;
+//	return n;
+//}
+
+//int main()
+//{
+//	int& ret = Count();
+//	cout << ret << endl;
+//	cout << &ret << endl;
+//	再次调用，同样的地址，不同的数据
+//	cout << ret << endl;
+//	cout << &ret << endl;
+//
+//	return 0;
+//}
 
 int main()
 {
-	int& ret = Count();
-	cout << ret << endl;
-	cout << &ret << endl;
-	//再次调用，同样的地址，不同的数据
-	cout << ret << endl;
-	cout << &ret << endl;
+	int a = 10;
+
+	int& ra = a;
+	ra = 20;
+
+	int* pa = &a;
+	*pa = 20;
 
 	return 0;
 }
