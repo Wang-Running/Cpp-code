@@ -187,18 +187,39 @@ class A3
 
 
 //this指针第二题
-class A
-{
-public:
-	void Show()
-	{
-		cout << _a << endl;
-	}
-private:
-	int _a;
+//class A
+//{
+//public:
+//	void Show()
+//	{
+//		cout << _a << endl;
+//	}
+//private:
+//	int _a;
+//};
+//
+//int main()
+//{
+//	A* p = nullptr;
+//	p->Show();
+//}
+//
+
+
+struct A{
+
+	long a1;
+
+	short a2;
+
+	int a3;
+
+	int *a4;
+
 };
+
 int main()
 {
-	A* p = nullptr;
-	p->Show();
+	cout << sizeof(A) << endl;
+	return 0;
 }
