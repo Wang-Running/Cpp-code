@@ -30,6 +30,14 @@ public:
 		_top = 0;
 		_capacity = capacity;
 	}
+	//¿½±´¹¹Ôì->Ç³¿½±´
+	Stack(const Stack& ST)
+	{
+		_a = ST._a;
+		_top = ST._top;
+		_capacity = ST._capacity;
+	}
+
 	~Stack()
 	{
 		free(_a);
@@ -70,12 +78,13 @@ public:
 		_day = day;
 	}
 
-	//Date(Date& d)
-	//{
-	//	_year = d._year;
-	//	_month = d._month;
-	//	_day = d._day;
-	//}
+	//¿½±´¹¹Ôìº¯Êý
+	Date(const Date& d)
+	{
+		_year = d._year;
+		_month = d._month;
+		_day = d._day;
+	}
 	~Date()
 	{
 		_year = 1;
@@ -94,14 +103,16 @@ private:
 	A aa;
 };
 
+void func(Date d)
+{
+
+}
 int main()
 {
 	Date d1;
-	Date d2(d1);
-	d1.Print();
-	d2.Print();
-	//Stack ST1(1);
-	//Stack ST2(2);
+	func(d1);
+	Stack ST1(1);
+	Stack ST2(ST1);
 	return 0;
 }
 
