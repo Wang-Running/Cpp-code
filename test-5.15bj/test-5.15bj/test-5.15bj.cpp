@@ -78,6 +78,10 @@ public:
 		_day = day;
 	}
 
+	void func(Date d)
+	{
+
+	}
 	//拷贝构造函数
 	Date(const Date& d)
 	{
@@ -96,6 +100,13 @@ public:
 	{
 		cout << _year << "-" << _month << "-" << _day << endl;
 	}
+	//
+	bool operator==(const Date& d2)
+	{
+		return _year == d2._year&&
+			_month == d2._month&&
+			_day == d2._day;
+	}
 private:
 	int _year;
 	int _month;
@@ -103,16 +114,35 @@ private:
 	A aa;
 };
 
-void func(Date d)
-{
+//参数：看运算符来定:两个相比较，那么就有两个形参
+//返回值：看运算后的结构，比较相等返回真假即可，即bool
+//bool operator==(Date d1, Date d2)
+//{
+//	return d1._year == d2._year&&
+//		d1._month == d2._month&&
+//		d1._day == d2._day;
+//}
 
-}
 int main()
 {
 	Date d1;
-	func(d1);
-	Stack ST1(1);
-	Stack ST2(ST1);
+	Date d2;
+
+	//调用类中函数
+
+	//if (d1.operator==(d2))
+	//{
+	//	cout << "==" << endl;
+	//}
+
+	if (d1 == d2)  //编译器会自动处理为 d1.operator==(d2)
+	{
+		cout << "==" << endl;
+	}
+
+	//func(d1);
+	//Stack ST1(1);
+	//Stack ST2(ST1);
 	return 0;
 }
 
