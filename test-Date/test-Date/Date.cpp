@@ -1,5 +1,6 @@
 #define _CRT_SECURE_NO_WARNINGS
 
+
 #include "Date.h"
 
 // 赋值运算符重载
@@ -27,66 +28,85 @@ Date& Date::operator=(const Date& d)
 
 
 
-//// 日期+=天数
+// 日期+=天数
 
-//Date& operator+=(int day);
-
-
+Date& Date::operator+=(int day)
+{
+	if (day<0)
+	{
+		return *this -= -day;
+	}
+	_day += day;
+	while (_day>GetMonthDay(_year, _month))
+	{
+		_day -= GetMonthDay(_year, _month);
+		_month++;
+		if (_month == 13)
+		{
+			_year++;
+			_month = 1;
+		}
+	}
+	return *this;
+	//*this = *this + day;
+	//return *this;
+}
 
 // 日期+天数
-
 Date Date::operator+(int day)
 {
 	Date ret(*this);
-	ret._day += day;
-	while (ret._day>GetMonthDay(ret._year,ret._month))
-	{
-		ret._day -= GetMonthDay(ret._year, ret._month);
-		ret._month++;
-		if (ret._month == 13)
-		{
-			ret._year++;
-			ret._month = 1;
-		}
-	}
+	//ret._day += day;
+	//while (ret._day>GetMonthDay(ret._year, ret._month))
+	//{
+	//	ret._day -= GetMonthDay(ret._year, ret._month);
+	//	ret._month++;
+	//	if (ret._month == 13)
+	//	{
+	//		ret._year++;
+	//		ret._month = 1;
+	//	}
+	//}
+	ret += day;
 	return ret;
 }
 
 
 
-//// 日期-天数
+// 日期-天数
 
-//Date operator-(int day);
-
-
-
-//// 日期-=天数
-
-//Date& operator-=(int day);
-
-
-
-//// 前置++
-
-//Date& operator++();
+Date Date::operator-(int day)
+{
+	Date ret(*this);
+	ret -= day;
+	return ret;
+}
 
 
 
-//// 后置++
+// 日期-=天数
 
-//Date operator++(int);
+Date& Date::operator-=(int day)
+{
+	if (day<0)
+	{
+		return *this += -day;
+	}
+	_day -= day;
+	while (_day<=0)
+	{
+		_month--;
+		if (_month==0)
+		{
+			_month = 12;
+			_year--;
+		}
+		//月份给的是前一个月，而不是原来的月份
+		_day += GetMonthDay(_year, _month);
+	}
+	return *this;
+}
 
-
-
-//// 后置--
-
-//Date operator--(int);
-
-
-
-//// 前置--
-
-//Date& operator--();
 
 // >运算符重载
 
@@ -199,7 +219,28 @@ bool Date::operator != (const Date& d)
 
 // 日期-日期 返回天数
 
-//int operator-(const Date& d);
+int Date::operator-(const Date& d)
+{
+	int flag = 1;
+	Date max = *this;
+	Date min = d;
+	if (*this<d)
+	{
+		min = *this;
+		max = d;
+		flag = -1;
+	}
+	//让小的累加至大的
+	//累加的天数n为差值
+	int n = 0;
+	while (min != max)
+	{
+		n++;
+		min++;
+	}
+
+	return n*flag;
+}
 
 int Date::GetMonthDay(int year, int month)
 {
@@ -214,3 +255,4 @@ int Date::GetMonthDay(int year, int month)
 		return MDay[month];
 	}
 }
+

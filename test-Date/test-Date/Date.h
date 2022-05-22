@@ -39,7 +39,11 @@ public:
 		{
 			cout << "非法日期" << endl;
 		}
+		_year = year;
 
+		_month = month;
+
+		_day = day;
 	}
 
 
@@ -94,22 +98,36 @@ public:
 
 
 	// 前置++
-	Date& operator++();
-
-
+	Date& operator++()
+	{
+		*this += 1;
+		return *this;
+	}
 
 	// 后置++
-	Date operator++(int);
+	Date operator++(int)
+	{
+		Date ret(*this);
+		ret += 1;
+		return ret;
+	}
 
 
 
 	// 后置--
-	Date operator--(int);
-
-
+	Date operator--(int)
+	{
+		Date ret(*this);
+		ret -= 1;
+		return ret;
+	}
 
 	// 前置--
-	Date& operator--();
+	Date& operator--()
+	{
+		*this -= 1;
+		return *this;
+	}
 
 	// >运算符重载
 	bool operator>(const Date& d);
@@ -159,3 +177,4 @@ private:
 	int _month;
 	int _day;
 };
+
