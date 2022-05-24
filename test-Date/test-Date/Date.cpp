@@ -110,7 +110,7 @@ Date& Date::operator-=(int day)
 
 // >运算符重载
 
-bool Date::operator>(const Date& d)
+bool Date::operator>(const Date& d) const
 {
 	//if ((_year > d._year) ||
 	//	(_year == d._year) && (_month > d._month) ||
@@ -132,7 +132,7 @@ bool Date::operator>(const Date& d)
 //返回值：看运算后的结构，比较相等返回真假即可，即bool
 
 //这里隐含参数为this指针
-bool Date::operator==(const Date& d)
+bool Date::operator==(const Date& d) const
 {
 	return _year == d._year&&
 		_month == d._month&&
@@ -143,7 +143,7 @@ bool Date::operator==(const Date& d)
 
 // >=运算符重载
 
-inline bool Date::operator >= (const Date& d)
+inline bool Date::operator >= (const Date& d) const
 {
 	//if ((_year > d._year) ||
 	//	(_year == d._year) && (_month > d._month) ||
@@ -163,7 +163,7 @@ inline bool Date::operator >= (const Date& d)
 
 // <运算符重载
 
-bool Date::operator < (const Date& d)
+bool Date::operator < (const Date& d) const
 {
 	if ((_year < d._year) ||
 		(_year == d._year) && (_month < d._month) ||
@@ -181,7 +181,7 @@ bool Date::operator < (const Date& d)
 
 // <=运算符重载
 
-bool Date::operator <= (const Date& d)
+bool Date::operator <= (const Date& d) const
 {
 	//if ((_year < d._year) ||
 	//	(_year == d._year) && (_month < d._month) ||
@@ -200,7 +200,7 @@ bool Date::operator <= (const Date& d)
 
 // !=运算符重载
 
-bool Date::operator != (const Date& d)
+bool Date::operator != (const Date& d) const
 {
 	/*if ((_year != d._year) ||
 	(_year == d._year) && (_month != d._month) ||

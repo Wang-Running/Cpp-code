@@ -69,6 +69,7 @@ public:
 
 
 
+
 	// 析构函数
 	~Date()
 	{
@@ -130,32 +131,32 @@ public:
 	}
 
 	// >运算符重载
-	bool operator>(const Date& d);
+	bool operator>(const Date& d) const;
 
 
 
 	// ==运算符重载
-	bool operator==(const Date& d);
+	bool operator==(const Date& d) const;
 
 
 
 	// >=运算符重载
-	inline bool operator >= (const Date& d);
+	inline bool operator >= (const Date& d) const;
 
 
 
 	// <运算符重载
-	bool operator < (const Date& d);
+	bool operator < (const Date& d) const;
 
 
 
 	// <=运算符重载
-	bool operator <= (const Date& d);
+	bool operator <= (const Date& d) const;
 
 
 
 	// !=运算符重载
-	bool operator != (const Date& d);
+	bool operator != (const Date& d) const;
 
 
 	// 日期-日期 返回天数
@@ -167,14 +168,41 @@ public:
 		_month = month;
 		_day = day;
 	}
-	void Print()
+
+	//写在函数后面
+	void Print() const
 	{
 		cout << _year << "-" << _month << "-" << _day << endl;
 	}
 
+	Date* operator&()
+	{
+		return nullptr;
+	}
+
+	const Date* operator&() const
+	{
+		return nullptr;
+	}
+
+	//int Getyear() const
+	//{
+	//	return _year;
+	//}
+	//int Getmonth() const
+	//{
+	//	return _month;
+	//}
+	//int Getday() const
+	//{
+	//	return _day;
+	//}
+	friend std::ostream& operator<< (std::ostream& out, const Date& d);
+	friend std::istream& operator>> (std::istream& in, Date& d);
 private:
 	int _year;
 	int _month;
 	int _day;
 };
+
 
