@@ -61,9 +61,84 @@
 //	return 0;
 //}
 
-//KY222 打印日期 -- c版
+//KY222 打印日期 
+//#include <iostream>
+//using namespace std;
+//
+//bool leapyear(int year)
+//{
+//	if (year % 4 == 0 && year % 100 != 0 || year % 400 == 0)
+//	{
+//		return true;
+//	}
+//	else
+//		return false;
+//}
+//
+//void time(int year, int day, int days1[], int days2[])
+//{
+//	if (leapyear(year))
+//	{
+//		int i = 1;
+//		while (i<13)
+//		{
+//			int d;
+//			if (day > days2[i] && day <= days2[i + 1])
+//			{
+//				d = (day - days2[i]);
+//				printf("%04d-%02d-%02d\n", year, i + 1, d);
+//				break;
+//			}
+//			if (day <= days2[i])
+//			{
+//				d = day - days2[i - 1];
+//				printf("%04d-%02d-%02d\n", year, i, d);
+//				break;
+//			}
+//			i++;
+//		}
+//	}
+//	else
+//	{
+//		int i = 1;
+//		while (i<13)
+//		{
+//			int d;
+//			if (day > days1[i] && day <= days1[i + 1])
+//			{
+//				d = (day - days1[i]);
+//				printf("%04d-%02d-%02d\n", year, i + 1, d);
+//				break;
+//			}
+//			if (day == days1[i])
+//			{
+//				d = day - days1[i - 1];
+//				printf("%04d-%02d-%02d\n", year, i, d);
+//				break;
+//			}
+//			i++;
+//		}
+//	}
+//}
+//
+//int main()
+//{
+//	int days1[13] = { 0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334, 365 };
+//	int days2[13] = { 0, 31, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335, 366 };
+//	int year = 2000, day = 55;
+//	while (~scanf("%d %d", &year, &day))
+//	{
+//		time(year, day, days1, days2);;
+//	}
+//	return 0;
+//}
+
+
+//KY258 日期累加
 #include <iostream>
-using namespace std;
+using std::cin;
+using std::cout;
+using std::endl;
 
 bool leapyear(int year)
 {
@@ -72,63 +147,123 @@ bool leapyear(int year)
 		return true;
 	}
 	else
+	{
 		return false;
+	}
 }
 
-void time(int year, int day, int days1[], int days2[])
+void time(int year, int month, int day, int days, int days1[], int days2[])
 {
-	if (leapyear(year))
+	if (leapyear)
 	{
-		int i = 1;
-		while (i<13)
+		//1.不跨年
+		while (month < 12 && (day + days) > days2[month])
 		{
-			int d;
-			if (day > days2[i] && day <= days2[i + 1])
+			days -= days2[month];
+			month++;
+		}
+		if (month < 12 && (day + days) <= days2[month])
+		{
+			day += days;
+			printf("%4d-%02d-%02d\n", year, month, day);
+		}
+
+		//2.跨年，要注意也要判断平年还是闰年
+		while (month == 12)
+		{
+			days -= days2[month];
+			month = 1;
+			year++;
+			//判断年
+			if (leapyear(year))
 			{
-				d = (day - days2[i]);
-				printf("%04d-%02d-%02d\n", year, i + 1, d);
-				break;
+				while (month<12 && (day + days) > days2[month])
+				{
+					days -= days2[month];
+					month++;
+				}
+				if (month<12 && (day + days) <= days2[month])
+				{
+					day += days;
+					printf("%4d-%02d-%02d\n", year, month, day);
+				}
 			}
-			if (day <= days2[i])
+			else
 			{
-				d = day - days2[i - 1];
-				printf("%04d-%02d-%02d\n", year, i, d);
-				break;
+				while (month<12 && (day + days) > days1[month])
+				{
+					days -= days1[month];
+					month++;
+				}
+				if (month<12 && (day + days) <= days1[month])
+				{
+					day += days;
+					printf("%4d-%02d-%02d\n", year, month, day);
+				}
 			}
-			i++;
 		}
 	}
 	else
 	{
-		int i = 1;
-		while (i<13)
+		//1.不跨年
+		while (month < 12 && (day + days) > days1[month])
 		{
-			int d;
-			if (day > days1[i] && day <= days1[i + 1])
+			days -= days1[month];
+			month++;
+		}
+		if (month < 12 && (day + days) <= days1[month])
+		{
+			day += days;
+			printf("%4d-%02d-%02d\n", year, month, day);
+		}
+
+		//2.跨年
+		while (month == 12)
+		{
+			days -= days1[month];
+			month = 1;
+			year++;
+			//判断年份
+			if (!leapyear(year))
 			{
-				d = (day - days1[i]);
-				printf("%04d-%02d-%02d\n", year, i + 1, d);
-				break;
+				while (month<12 && (day + days) > days1[month])
+				{
+					days -= days1[month];
+					month++;
+				}
+				if (month<12 && (day + days) <= days1[month])
+				{
+					day += days;
+					printf("%4d-%02d-%02d\n", year, month, day);
+				}
 			}
-			if (day == days1[i])
+			else
 			{
-				d = day - days1[i - 1];
-				printf("%04d-%02d-%02d\n", year, i, d);
-				break;
+				while (month<12 && (day + days) > days2[month])
+				{
+					days -= days2[month];
+					month++;
+				}
+				if (month<12 && (day + days) <= days2[month])
+				{
+					day += days;
+					printf("%4d-%02d-%02d\n", year, month, day);
+				}
 			}
-			i++;
 		}
 	}
 }
 
 int main()
 {
-	int days1[13] = { 0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334, 365 };
-	int days2[13] = { 0, 31, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335, 366 };
-	int year = 2000, day = 55;
-	while (~scanf("%d %d", &year, &day))
+	int days1[13] = { 0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+	int days2[13] = { 0, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+	int num, year, month, day, days;
+	cin >> num;
+	for (int i = 0; i<num; i++)
 	{
-		time(year, day, days1, days2);;
+		cin >> year >> month >> day >> days;
+		time(year, month, day, days, days1, days2);
 	}
 	return 0;
 }
