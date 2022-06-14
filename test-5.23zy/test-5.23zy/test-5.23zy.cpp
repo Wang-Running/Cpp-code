@@ -154,7 +154,7 @@ bool leapyear(int year)
 
 void time(int year, int month, int day, int days, int days1[], int days2[])
 {
-	if (leapyear)
+	if (leapyear(year))
 	{
 		//1.²»¿çÄê
 		while (month < 12 && (day + days) > days2[month])
