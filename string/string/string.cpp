@@ -71,6 +71,23 @@ void test4()
 	}
 	cout << endl;
 }
+void test7()
+{
+	string s1("abcdefg");
+	//3.迭代器反向遍历--reverse_iterator
+
+	//从第一个位置开始
+	string::reverse_iterator rit = s1.rbegin();
+
+	//end()是结束位置的下一个位置
+	while (rit != s1.rend())
+	{
+		cout << *rit << " ";
+		rit++;
+	}
+	cout << endl;
+}
+
 void test5()
 {
 	//3.范围for遍历
@@ -81,8 +98,71 @@ void test5()
 	}
 	cout << endl;
 }
+
+//string访问字符并修改
+void test6()
+{
+	//1.下标修改
+	string s1("xxxxxxx");
+	s1[3] = 'D';
+	cout << s1 << endl;
+	//2.访问at函数修改
+	s1.at(0) = 'A';
+	cout << s1 << endl;
+}
+
+//传参
+void func(const string& s)
+{
+	string::const_iterator it=s.begin();
+	while (it != s.end())
+	{
+		cout << *it << " ";
+		it++;
+	}
+	cout << endl;
+}
+
+//容量
+void test8()
+{
+	string s1;
+	//s1.reserve(150);
+	s1.resize(150, 'x');
+	//func(s1);
+	for (int i = 0; i<10; i++)
+	{
+		s1 += "abcdefg";
+		cout << s1.capacity() << endl;
+	}
+	cout << s1.size() << endl;
+}
 int main()
 {
-	test5();
+	//string s1;
+	//string s2("hello");
+	////插入字符
+	//s1.push_back('a');
+	//cout << s1 << endl;
+
+	////1.插入字符串-直接插入
+	//s1.append("bcdf");
+	//cout << s1 << endl;
+
+	////2.插入string对象
+	//s1.append(s2);
+	//cout << s1 << endl;
+
+	string s1;
+	string s2("hello");
+	s1 += 'a';
+	cout << s1 << endl;
+
+	s1 += "abcdef";
+	cout << s1 << endl;
+
+	s1 += s2;
+	cout << s1 << endl;
+
 	return 0;
 }
