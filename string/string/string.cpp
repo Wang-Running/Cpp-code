@@ -137,32 +137,101 @@ void test8()
 	}
 	cout << s1.size() << endl;
 }
+
+
+//int main()
+//{
+//	//string s1;
+//	//string s2("hello");
+//	////插入字符
+//	//s1.push_back('a');
+//	//cout << s1 << endl;
+//
+//	////1.插入字符串-直接插入
+//	//s1.append("bcdf");
+//	//cout << s1 << endl;
+//
+//	////2.插入string对象
+//	//s1.append(s2);
+//	//cout << s1 << endl;
+//
+//	string s1;
+//	string s2("hello");
+//	s1 += 'a';
+//	cout << s1 << endl;
+//
+//	s1 += "abcdef";
+//	cout << s1 << endl;
+//
+//	s1 += s2;
+//	cout << s1 << endl;
+//
+//	return 0;
+//}
+
+
+
+//1.
+//int main()
+//{
+//
+//	string str("Hello Bit.");
+//
+//	str.reserve(111);
+//
+//	str.resize(5);
+//
+//	str.reserve(50);
+//
+//	cout << str.size() << ":" << str.capacity() << endl;
+//
+//	return 0;
+//
+//}
+
+//2.c_str() 返回的是一个指针数组的指针，内容相同指针不同
 int main()
 {
-	//string s1;
-	//string s2("hello");
-	////插入字符
-	//s1.push_back('a');
-	//cout << s1 << endl;
 
-	////1.插入字符串-直接插入
-	//s1.append("bcdf");
-	//cout << s1 << endl;
+		string a = "hello world";
+		cout << a.c_str() << endl;
+		string b = a;
+		cout << b.c_str() << endl;
+		if (a.c_str() == b.c_str())
 
-	////2.插入string对象
-	//s1.append(s2);
-	//cout << s1 << endl;
+		{
 
-	string s1;
-	string s2("hello");
-	s1 += 'a';
-	cout << s1 << endl;
+			cout << "true" << endl;
 
-	s1 += "abcdef";
-	cout << s1 << endl;
+		}
 
-	s1 += s2;
-	cout << s1 << endl;
+		else cout << "false" << endl;
 
-	return 0;
+		string c = b;
+
+		c = "";
+
+		if (a.c_str() == b.c_str())
+
+		{
+
+			cout << "true" << endl;
+
+		}
+
+		else cout << "false" << endl;
+
+		a = "";
+
+		if (a.c_str() == b.c_str())
+
+		{
+
+			cout << "true" << endl;
+
+		}
+
+		else cout << "false" << endl;
+
+		return 0;
 }
