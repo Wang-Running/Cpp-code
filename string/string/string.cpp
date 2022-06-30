@@ -124,19 +124,19 @@ void func(const string& s)
 }
 
 //容量
-void test8()
-{
-	string s1;
-	//s1.reserve(150);
-	s1.resize(150, 'x');
-	//func(s1);
-	for (int i = 0; i<10; i++)
-	{
-		s1 += "abcdefg";
-		cout << s1.capacity() << endl;
-	}
-	cout << s1.size() << endl;
-}
+//void test8()
+//{
+//	string s1;
+//	//s1.reserve(150);
+//	s1.resize(150, 'x');
+//	//func(s1);
+//	for (int i = 0; i<10; i++)
+//	{
+//		s1 += "abcdefg";
+//		cout << s1.capacity() << endl;
+//	}
+//	cout << s1.size() << endl;
+//}
 
 
 //int main()
@@ -171,6 +171,7 @@ void test8()
 
 
 
+
 //1.
 //int main()
 //{
@@ -190,48 +191,123 @@ void test8()
 //}
 
 //2.c_str() 返回的是一个指针数组的指针，内容相同指针不同
+//int main()
+//{
+//
+//		string a = "hello world";
+//		cout << a.c_str() << endl;
+//		string b = a;
+//		cout << b.c_str() << endl;
+//		if (a.c_str() == b.c_str())
+//
+//		{
+//
+//			cout << "true" << endl;
+//
+//		}
+//
+//		else cout << "false" << endl;
+//
+//		string c = b;
+//
+//		c = "";
+//
+//		if (a.c_str() == b.c_str())
+//
+//		{
+//
+//			cout << "true" << endl;
+//
+//		}
+//
+//		else cout << "false" << endl;
+//
+//		a = "";
+//
+//		if (a.c_str() == b.c_str())
+//
+//		{
+//
+//			cout << "true" << endl;
+//
+//		}
+//
+//		else cout << "false" << endl;
+//
+//		return 0;
+//}
+
+
+//int main()
+//{
+//	string s1("Aut CAD");
+//	cout << s1 << endl;
+//	//用 insert 在 t 后面插入字符 'o'
+//	//s1.insert(3, 1, 'o');
+//	//cout << s1 << endl;
+//
+//	//不考虑个数，用迭代器
+//	s1.insert(s1.begin() + 3, 'o');
+//	cout << s1 << endl;
+//	return 0;
+//}
+
+//int main()
+//{
+//	string s1("world");
+//	cout << s1 << endl;
+//
+//	//插入字符串
+//	s1.insert(0,"hello ");
+//	cout << s1 << endl;
+//
+//	//删除指定位置字符
+//	//s1.erase(s1.begin()+7);
+//	//cout << s1 << endl;
+//
+//	//删除指定位置字符串
+//	s1.erase(0);
+//	cout << s1 << endl;
+//	return 0;
+//}
+
+//int main()
+//{
+//	string s1("hello");
+//	string s2("csdn");
+//	//用类中的函数交换
+//	s1.swap(s2);
+//	cout << s1 << endl << s2 << endl;
+//}
+
+//int main()
+//{
+//	string s1("hello");
+//	cout << typeid(s1).name() << endl;
+//	cout << typeid(s1.c_str()).name() << endl;
+//	return 0;
+//}
+
+//cout << s1.find("hello",6) << endl;
+//cout << s1.find("hellll", 6) << endl;
+
+//int main()
+//{
+//	string s1("xxxxxxxxhelloaaaaa");
+//	size_t end = s1.rfind("o");
+//	size_t pos = s1.find("hello");
+//	if(s1.find("hello")!=string::npos)
+//	{
+//		cout << s1.substr(pos, end - pos+1) << endl;
+//	}
+//	return 0;
+//}
+
 int main()
 {
-
-		string a = "hello world";
-		cout << a.c_str() << endl;
-		string b = a;
-		cout << b.c_str() << endl;
-		if (a.c_str() == b.c_str())
-
-		{
-
-			cout << "true" << endl;
-
-		}
-
-		else cout << "false" << endl;
-
-		string c = b;
-
-		c = "";
-
-		if (a.c_str() == b.c_str())
-
-		{
-
-			cout << "true" << endl;
-
-		}
-
-		else cout << "false" << endl;
-
-		a = "";
-
-		if (a.c_str() == b.c_str())
-
-		{
-
-			cout << "true" << endl;
-
-		}
-
-		else cout << "false" << endl;
-
-		return 0;
+	string str;
+	/*cin >> str;*/
+	getline(cin,str);
+	cout << str << endl;
+	return 0;
 }
