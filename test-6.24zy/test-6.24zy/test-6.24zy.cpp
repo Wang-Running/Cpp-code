@@ -118,3 +118,98 @@
 //			return sum;
 //	}
 //};
+
+//344. 反转字符串
+//class Solution {
+//public:
+//	void reverseString(vector<char>& s) {
+//		vector<char>::iterator first = s.begin();
+//		vector<char>::iterator tail = s.end() - 1;
+//		while (first<tail)
+//		{
+//			char ch;
+//			ch = *first;
+//			*first = *tail;
+//			*tail = ch;
+//			first++;
+//			tail--;
+//		}
+//	}
+//};
+
+//541. 反转字符串 II
+//class Solution {
+//public:
+//	string reverseStr(string s, int k) {
+//		size_t size = s.size();
+//		//k没有越界时：
+//		if (k <= size)
+//		{
+//			for (size_t i = 0; i<size; i += 2 * k)
+//			{
+//				//一个k区间换，一个k区间不换，再下一个k区间换，再下一个不换……
+//				if (i + k <= size)
+//				{
+//					reverse(s.begin() + i, s.begin() + i + k);
+//				}
+//
+//				//如果末尾k区间越界，则开始到末尾反转
+//				else
+//				{
+//					reverse(s.begin() + i, s.begin() + size);
+//				}
+//			}
+//		}
+//		//k大于size，s整体反转
+//		else
+//		{
+//			reverse(s.begin(), s.begin() + size);
+//		}
+//		return s;
+//	}
+//};
+
+
+//415. 字符串相加
+//#include<iostream>
+//using namespace std;
+//class Solution {
+//public:
+//	string addStrings(string num1, string num2) {
+//		int end1 = num1.size() - 1;
+//		int end2 = num2.size() - 1;
+//		//进位
+//		int carry = 0;
+//		string retstr;
+//		while (end1 >= 0 || end2 >= 0)
+//		{
+//			int val1 = end1 >= 0 ? num1[end1] - '0' : 0;
+//			int val2 = end2 >= 0 ? num2[end2] - '0' : 0;
+//			int ret = val1 + val2 + carry;
+//			if (ret>9)
+//			{
+//				ret -= 10;
+//				carry = 1;
+//			}
+//			else
+//			{
+//				carry = 0;
+//			}
+//
+//			//retstr.insert(retstr.begin(),'0'+ret);
+//			retstr += ('0' + ret);
+//			--end1;
+//			--end2;
+//		}
+//		if (carry == 1)
+//		{
+//			//retstr.insert(retstr.begin(),'1');
+//			retstr += '1';
+//		}
+//
+//		reverse(retstr.begin(), retstr.end());
+//		return retstr;
+//	}
+//};
+
+//
