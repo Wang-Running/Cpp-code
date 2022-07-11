@@ -169,6 +169,62 @@
 //	}
 //};
 
+//125. 验证回文串
+//class Solution {
+//public:
+//	bool isPalindrome(string s) {
+//		string s2;
+//		//先将字母和数字字符提取到一个string中
+//		for (auto e : s)
+//		{
+//			if ('a' <= e && e <= 'z' ||
+//				'A' <= e && e <= 'Z' ||
+//				'0' <= e && e <= '9')
+//			{
+//				s2 += e;
+//			}
+//		}
+//		string::iterator first = s2.begin();
+//		string::iterator tail = s2.end() - 1;
+//		//双指针，进行判断
+//		while (first <= tail)
+//		{
+//			//1.当其中有数字字符时，直接看前后指针是否相等
+//			if (('0' <= *first && *first <= '9') ||
+//				'0' <= *tail && *tail <= '9')
+//			{
+//				if (*(first) == *(tail))
+//				{
+//					first++;
+//					tail--;
+//				}
+//				else
+//				{
+//					return false;
+//				}
+//			}
+//			//2.当全部为字母字符时，要判断前后字母是否相等，大小写字母相同
+//			else
+//			{
+//				if (*(first) == *(tail) ||
+//					*(first)+32 == *(tail) ||
+//					*(first)-32 == *(tail))
+//				{
+//					first++;
+//					tail--;
+//				}
+//				else
+//				{
+//					return false;
+//				}
+//			}
+//		}
+//		return true;
+//	}
+//};
+
+
+
 
 //415. 字符串相加
 //#include<iostream>
