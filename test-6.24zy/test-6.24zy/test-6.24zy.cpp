@@ -269,3 +269,146 @@
 //};
 
 
+//43. 字符串相乘
+//class solution {
+//public:
+//	string addStrings(string num1, string num2) {
+//		int end1 = num1.size() - 1;
+//		int end2 = num2.size() - 1;
+//		//进位
+//		int carry = 0;
+//		string retstr;
+//		while (end1 >= 0 || end2 >= 0)
+//		{
+//			int val1 = end1 >= 0 ? num1[end1] - '0' : 0;
+//			int val2 = end2 >= 0 ? num2[end2] - '0' : 0;
+//			int ret = val1 + val2 + carry;
+//			if (ret>9)
+//			{
+//				ret -= 10;
+//				carry = 1;
+//			}
+//			else
+//			{
+//				carry = 0;
+//			}
+//
+//
+//			//retstr.insert(retstr.begin(),'0'+ret);
+//			retstr += ('0' + ret);
+//			--end1;
+//			--end2;
+//		}
+//		if (carry == 1)
+//		{
+//			//retstr.insert(retstr.begin(),'1');
+//			retstr += '1';
+//		}
+//
+//
+//		reverse(retstr.begin(), retstr.end());
+//		return retstr;
+//	}
+//};
+//
+//solution A;
+//
+//class Solution {
+//public:
+//	string multiply(string num1, string num2) {
+//		int end1 = num1.size() - 1;
+//		int end2 = num2.size() - 1;
+//		if (end1<end2)
+//		{
+//			swap(end1, end2);
+//		}
+//		//进位
+//		int carry = 0;
+//		//计数循环
+//		int count = 0;
+//		string retstr;
+//		//得数和
+//		string sum;
+//		while (end1 >= 0 && end2 >= 0)
+//		{
+//			int val1 = end1 >= 0 ? num1[end1] - '0' : 0;
+//			int val2 = end2 >= 0 ? num2[end2] - '0' : 0;
+//			int ret = val1 * val2 + carry;
+//			if (ret>9)
+//			{
+//				carry = ret - ret % 10;
+//				ret %= 10;
+//			}
+//			else
+//			{
+//				carry = 0;
+//			}
+//
+//			//retstr.insert(retstr.begin(),'0'+ret);
+//			retstr += ('0' + ret);
+//			--end1;
+//			if (end1<0 && end2 >= 0)
+//			{
+//				count++;
+//				end1 = num1.size() - 1;
+//				--end2;
+//				sum = A.addStrings(sum, retstr);
+//				retstr = "";
+//				int i = 0;
+//				for (i = count; i<count; i++)
+//				{
+//					retstr += '0';
+//				}
+//			}
+//
+//		}
+//		if (carry != 0)
+//		{
+//			//retstr.insert(retstr.begin(),'1');
+//			retstr += (carry + '0');
+//		}
+//
+//
+//		reverse(sum.begin(), sum.end());
+//		return sum;
+//	}
+//};
+
+//557. 反转字符串中的单词 III
+#include <iostream>
+using namespace std;
+class Solution {
+public:
+	string reverseWords(string s) {
+		//找空格，双指针，区间反转，最后在翻转一次即可
+		string::iterator it = s.begin();
+		string::iterator begin = s.begin();
+		while (it != s.end())
+		{
+			if (*it == ' ')
+			{
+				reverse(begin, it);
+				begin = it + 1;
+			}
+			it++;
+		}
+		reverse(begin, it);
+		return s;
+	}
+};
+int main()
+{
+	string s = "Let's take LeetCode contest";
+	for (auto e:s)
+	{
+		cout << e << "";
+	}
+	cout << endl;
+	Solution A;
+	s = A.reverseWords(s);
+	for (auto e : s)
+	{
+		cout << e << "";
+	}
+	cout << endl;
+}
