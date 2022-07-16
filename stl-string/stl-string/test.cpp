@@ -140,10 +140,10 @@ void test_string8()
 {
 	//bit::mystring s("hello word");
 	//cout << s << endl;
-	bit::mystring s1;
-	bit::mystring s2;
-	cin >> s1>>s2;
-	cout << s1 << ' ' <<s2<<endl;
+	bit::mystring s1("hello word");
+	//bit::mystring s2;
+	cin >> s1;
+	cout << s1 << endl;
 }
 int main()
 {
@@ -151,7 +151,7 @@ int main()
 	//func(s);
 	try
 	{
-		test_string8();
+		test_string2();
 	}
 	catch (const exception& e)
 	{

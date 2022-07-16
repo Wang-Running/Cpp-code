@@ -53,15 +53,52 @@ namespace bit
 			strcpy(_str, str);
 		}
 
+
+		//现代写法2
+		void swap(mystring&s)
+		{
+			std::swap(_str, s._str);
+			std::swap(_size, s._size);
+			std::swap(_capacity, s._capacity);
+		}
+		mystring(const mystring& s)
+			:_str(nullptr)
+			, _size(0)
+			, _capacity(0)
+		{
+			mystring tmp(s._str);
+			//把交换写在外面
+			swap(tmp);
+		}
+
+		////现代写法1
+		//mystring(const mystring& s)
+		//	:_str(nullptr)
+		//	,_size(0)
+		//	, _capacity(0)
+		//{
+		//	mystring tmp(s._str);
+		//	swap(_str, tmp._str);
+		//	swap(_size, tmp._size);
+		//	swap(_capacity, tmp._capacity);
+		//}
+		//不能直接进行交换，会失去原对象--不是目的
+		/*mystring( mystring& s)
+		{
+			swap(_str, s._str);
+			swap(_size, s._size);
+			swap(_capacity, s._capacity);
+		}*/
+
 		//构造拷贝s2(s1)
 		//系统默认为浅拷贝，会存在连续析构问题，这里要完成深拷贝
-		mystring(const mystring& s)
+		/*mystring(const mystring& s)
 			:_size(strlen(s._str))
 			, _capacity(_size)
 		{
 			_str = new char[strlen(s._str) + 1];
 			strcpy(_str, s._str);
-		}
+		}*/
 
 		//重载赋值运算符s1=s3
 		//直接拷贝存在内存过大或太小，不判断相等的话会被释放掉
@@ -77,18 +114,34 @@ namespace bit
 		}*/
 
 		//因为开空间失败后会抛异常，上述写法还已经释放了s1--改进如下
-		mystring& operator=(const mystring s)
+		//mystring& operator=(const mystring& s)
+		//{
+		//	if (_str != s._str)
+		//	{
+		//		                    // s._capacity + 1
+		//		char* tmp = new char[strlen(s._str) + 1];
+		//		strcpy(tmp, s._str);
+		//		delete[] _str;
+		//		_str = tmp;
+		//		_size = s._size;
+		//		_capacity = s._capacity;
+		//	}
+		//	return *this;
+		//}
+
+		//重载 = 的现代写法
+		/*mystring& operator=(const mystring& s)
 		{
-			if (_str != s._str)
+			if (this != &s)
 			{
-				                    // s._capacity + 1
-				char* tmp = new char[strlen(s._str) + 1];
-				strcpy(tmp, s._str);
-				delete[] _str;
-				_str = tmp;
-				_size = s._size;
-				_capacity = s._capacity;
+				mystring tmp(s._str);
+				swap(tmp);
 			}
+			return *this;
+		}*/
+		mystring& operator=(mystring s)
+		{
+			swap(s);
 			return *this;
 		}
 
@@ -307,6 +360,11 @@ namespace bit
 			}
 		}
 
+		void clear()
+		{
+			_str[0] = '\0';
+			_size = 0;
+		}
 	private:
 		char* _str;
 		//增删查改
@@ -333,6 +391,7 @@ namespace bit
 	//输入流
 	istream& operator>>(istream& in, mystring& s)
 	{
+		s.clear();
 		char ch;
 		//in >> ch;  //直接获取不到空格和换行，使用get
 		ch = in.get();
