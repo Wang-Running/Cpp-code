@@ -9,6 +9,28 @@ namespace bit
 	class mystring
 	{
 	public:
+
+		//迭代器
+		typedef char* iterator;
+		typedef const char* const_iterator;
+
+		iterator begin()
+		{
+			return _str;
+		}
+		const_iterator begin() const
+		{
+			return _str;
+		}
+		iterator end()
+		{
+			return _str + _size;
+		}
+		const_iterator end() const
+		{
+			return _str + _size;
+		}
+
 		//无参的默认构造
 		/*mystring()
 			:_size(0)
@@ -87,8 +109,13 @@ namespace bit
 			return _str;
 		}
 
-		//重载[]
+		//重载[],两个版本
 		char& operator[](size_t pos)
+		{
+			assert(pos < strlen(_str));
+			return _str[pos];
+		}
+		const char& operator[](size_t pos) const
 		{
 			assert(pos < strlen(_str));
 			return _str[pos];
@@ -165,31 +192,119 @@ namespace bit
 		void push_back(char ch)
 		{
 			//扩容
-			if (_size==_capacity)
-			{
-				/*char* tmp = new char[_capacity * 2 + 1];
-				strcpy(tmp, _str);
-				delete[] _str;
-				_str = tmp;
-				_capacity *= 2;*/
+			//if (_size==_capacity)
+			//{
+			//	/*char* tmp = new char[_capacity * 2 + 1];
+			//	strcpy(tmp, _str);
+			//	delete[] _str;
+			//	_str = tmp;
+			//	_capacity *= 2;*/
 
-				//复用reverse
-				reserve(_capacity == 0 ? 4 : _capacity * 2);
-			}
-			_str[_size] = ch;
-			_size++;
-			_str[_size] = '\0';
+			//	//复用reverse
+			//	reserve(_capacity == 0 ? 4 : _capacity * 2);
+			//}
+			//_str[_size] = ch;
+			//_size++;
+			//_str[_size] = '\0';
+			insert(_size, ch);
 		}
 
 		void append(const char* str)
 		{
-			size_t len = _size + strlen(str);
+			/*size_t len = _size + strlen(str);
 			if (len > _capacity)
 			{
 				reserve(len);
 			}
 			strcpy(_str + _size, str);
-			_size = len;
+			_size = len;*/
+			insert(_size, str);
+		}
+
+		//插入字符
+		mystring& insert(size_t pos,char ch)
+		{
+			assert(pos <= _size);
+			if (_size==_capacity)
+			{
+				reserve(_capacity == 0 ? 4 : _capacity * 2);
+			}
+			size_t end = _size+1;
+			while (end>pos)
+			{
+				_str[end] = _str[end-1];
+				end--;
+			}
+			_str[pos] = ch;
+			_size++;
+			return *this;
+		}
+		//插入字符串
+		mystring& insert(size_t pos, const char* str)
+		{
+			assert(pos <= _size);
+			size_t len = strlen(str);
+			if (_size+len>_capacity)
+			{
+				reserve(_size + len);
+			}
+			size_t end = len+_size;
+			while (end>pos+len-1)
+			{
+				_str[end] = _str[end-len];
+				end--;
+			}
+			strncpy(_str + pos, str, len);
+			_size += len;
+			return *this;
+		}
+		//删除
+		mystring& earse(size_t pos, size_t len = npos) 
+		{
+			assert(pos < _size);
+			//删完的情况
+			if (len == npos || pos + len >= _size)
+			{
+				_str[pos] = '\0';
+				_size = pos;
+			}
+			else
+			{
+				size_t begin = pos + len;
+				while (begin<=_size)
+				{
+					_str[begin-len] = _str[begin];
+					begin++;
+				}
+				_size -= len;
+			}
+			return *this;
+		}
+
+		//查找
+		size_t find(char ch,size_t pos=0)
+		{
+			for (;pos<_size;pos++)
+			{
+				if (_str[pos]==ch)
+				{
+					return pos;
+				}
+			}
+			return npos;
+		}
+
+		size_t find(const char* str, size_t pos = 0)
+		{
+			const char*p = strstr(_str+pos,str);
+			if (p==nullptr)
+			{
+				return npos;
+			}
+			else
+			{
+				return p - _str;
+			}
 		}
 
 	private:
@@ -197,7 +312,47 @@ namespace bit
 		//增删查改
 		size_t _size;
 		size_t _capacity;
+
+		//静态声明不能直接给缺省值
+		static size_t npos;
+		//const static size_t npos=-1;
 	};
+	size_t mystring::npos = -1;
+	 
+	//输出流
+	ostream& operator<<(ostream& out, const mystring& s)
+	{
+		//out << s.c_str();
+		//可以打印出‘\0’
+		for (auto ch : s)
+		{
+			out << ch;
+		}
+		return out;
+	}
+	//输入流
+	istream& operator>>(istream& in, mystring& s)
+	{
+		char ch;
+		//in >> ch;  //直接获取不到空格和换行，使用get
+		ch = in.get();
+		//每次都扩容消耗大
+		char buff[128] = { '\0' };
+		size_t i = 0;
+		while (ch!=' '&& ch!='\n')
+		{
+			buff[i++]= ch;
+			if (i==127)
+			{
+				s += buff;
+				memset(buff, '\0', 128);
+				i = 0;
+			}
+			ch=in.get();
+		}
+		s += buff;
+		return in;
+	}
 
 	//运算符重载--实现两个，其他进行复用
 	bool operator<(const mystring& s1, const mystring& s2)
