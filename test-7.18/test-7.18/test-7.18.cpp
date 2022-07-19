@@ -179,37 +179,99 @@ using namespace std;
 //}
 
 //菱形继承：数据冗余和二义性
-class Person
+//class Person
+//{
+//public:
+//	string _name = "human";
+//	int arr[100];
+//};
+//class Student :virtual public Person
+//{
+//protected:
+//	int _sid = 123;
+//};
+//class Teacher :virtual public Person
+//{
+//protected:
+//	int _tid = 0123;
+//};
+//class school :public Student,public Teacher
+//{
+//protected:
+//	int sh = 001;
+//};
+//int main()
+//{
+//	school sch;
+//
+//	sch._name = "xxx";
+//
+//	Student s;
+//	Teacher t;
+//	cout << sizeof(s) << endl;
+//	cout << sizeof(t) << endl;
+//	cout << sizeof(sch) << endl;
+//	return 0;
+//}
+
+//class A
+//{
+//public:
+//	int _a;
+//};
+//class B :public A
+//{
+//public:
+//	int _b;
+//};
+//class C :public A
+//{
+//public:
+//	int _c;
+//};
+//class D :public B,public C
+//{
+//public:
+//	int _d;
+//};
+//int main()
+//{
+//	D d;
+//	d.B::_a = 1;
+//	d.C::_a = 2;
+//	d._b = 3;
+//	d._c = 4;
+//	d._d = 5;
+//	return 0;
+//}
+
+class A
 {
 public:
-	string _name = "human";
-	int arr[100];
+	int _a;
 };
-class Student :virtual public Person
+class B :virtual public A
 {
-protected:
-	int _sid = 123;
+public:
+	int _b;
 };
-class Teacher :virtual public Person
+class C :virtual public A
 {
-protected:
-	int _tid = 0123;
+public:
+	int _c;
 };
-class school :public Student,public Teacher
+class D :public B,public C
 {
-protected:
-	int sh = 001;
+public:
+	int _d;
 };
 int main()
 {
-	school sch;
-
-	sch._name = "xxx";
-
-	Student s;
-	Teacher t;
-	cout << sizeof(s) << endl;
-	cout << sizeof(t) << endl;
-	cout << sizeof(sch) << endl;
+	D d;
+	d.B::_a = 1;
+	d.C::_a = 2;
+	d._b = 3;
+	d._c = 4;
+	d._d = 5;
 	return 0;
 }
