@@ -245,33 +245,71 @@ using namespace std;
 //	return 0;
 //}
 
-class A
-{
-public:
-	int _a;
+//ĞéÄâ¼Ì³Ğ
+//class A
+//{
+//public:
+//	int _a;
+//};
+//class B :virtual public A
+//{
+//public:
+//	int _b;
+//};
+//class C :virtual public A
+//{
+//public:
+//	int _c;
+//};
+//class D :public B,public C
+//{
+//public:
+//	int _d;
+//};
+//int main()
+//{
+//	D d;
+//	d.B::_a = 1;
+//	d.C::_a = 2;
+//	d._b = 3;
+//	d._c = 4;
+//	d._d = 5;
+//	return 0;
+//}
+
+class Base1
+{ 
+public: 
+	int _b1;
 };
-class B :virtual public A
-{
-public:
-	int _b;
+
+class Base2 
+{ 
+public: 
+	int _b2;
 };
-class C :virtual public A
+
+class Derive : public Base1, public Base2
+
 {
-public:
-	int _c;
-};
-class D :public B,public C
-{
-public:
+public: 
 	int _d;
 };
-int main()
-{
-	D d;
-	d.B::_a = 1;
-	d.C::_a = 2;
-	d._b = 3;
-	d._c = 4;
-	d._d = 5;
+
+
+
+int main(){
+
+
+
+	Derive d;
+
+	Base1* p1 = &d;
+
+	Base2* p2 = &d;
+
+	Derive* p3 = &d;
+
 	return 0;
+
 }
