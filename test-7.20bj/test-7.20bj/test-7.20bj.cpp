@@ -131,36 +131,23 @@ using namespace std;
 class Student
 {
 public:
-	virtual void test()
-	{
-		cout << "virtual void test()" << endl;
-	}
-	virtual void test2()
-	{
-		cout << "virtual void test2()" << endl;
-	}
+	virtual void test(){cout << "virtual void test()" << endl;}
+	virtual void test2(){cout << "virtual void test2()" << endl;}
 private:
 	int _sid;
 };
 class ordinary : public Student {
 public:
-	virtual void test() override 
-	{
-		cout << "良好" << endl; 
-	}
-	virtual void test3()
-	{
-		cout << "良好3" << endl;
-	}
-	virtual void test4()
-	{
-		cout << "良好4" << endl;
-	}
+	virtual void test() override {cout << "良好" << endl; }
+	virtual void test3(){cout << "良好3" << endl;}
+	void test4(){cout << "良好4" << endl;}
 };
+
+//打印虚函数表
 typedef void(*V_FUNC) ();
 void PrintVFTable(V_FUNC* a)
 {
-	for (size_t i = 0;a[0]!=nullptr;i++)
+	for (size_t i = 0;a[i]!=nullptr;i++)
 	{
 		printf("[%d]:%p->", i, a[i]);
 		V_FUNC f = a[i];
