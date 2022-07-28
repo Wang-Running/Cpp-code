@@ -5,6 +5,7 @@
 using namespace std;
 int main()
 {
-	TestBSTree();
+	TestBSTree2();
+	
 	return 0;
 }
