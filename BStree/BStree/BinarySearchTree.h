@@ -363,9 +363,10 @@ void TestBSTree2()
 	t.InOrder();
 
 	//øΩ±¥ππ‘Ï
-	BSTree<int> copy = t;
-	copy.InOrder();
-	t.EraseR(8);
+	//BSTree<int> copy = t;
+	//copy.InOrder();
+
+	t.EraseR(14);
 	t.InOrder();
 
 }
