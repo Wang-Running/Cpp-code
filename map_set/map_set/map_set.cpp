@@ -269,83 +269,102 @@ void test11()
 
 
 
-int main()
-{
-	test11();
-	return 0;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//void RotateR(Node* parent)
+//int main()
 //{
-//	Node* subleft = parent->left;
-//	Node* subright = parent->right;
-//	Node* pprent = parent->parent;
-//
-//	if (subrighr)
-//		parent->left = subright;
-//	subright->parent = 
-//
+//	test11();
+//	return 0;
 //}
+
+
+
+
+//692. 前K个高频单词
+//class Solution {
+//public:
+//	typedef map<string, int>::iterator CountTter;
 //
-//void RotateR(Node* parent)
+//	struct IterCompare
+//	{
+//		bool operator()(CountTter it1, CountTter it2)
+//		{                                                               //用sort，下面手动消除不稳定
+//			return it1->second > it2->second;            //return it1->second > it2->second || (it1->second ==it2->second && it1->first < it2->first);
+//		}
+//	};
+//
+//	vector<string> topKFrequent(vector<string>& words, int k) {
+//		map<string, int> countmap;
+//		//插入并计数
+//		for (auto& str : words)
+//		{
+//			countmap[str]++;
+//		}
+//
+//		//将迭代器放入vector，排序
+//		vector<CountTter> v;
+//		CountTter it = countmap.begin();
+//		while (it != countmap.end())
+//		{
+//			v.push_back(it);
+//			it++;
+//		}
+//
+//		//迭代器不支持排序，写一个迭代器比较的仿函数--- sort不稳定
+//		stable_sort(v.begin(), v.end(), IterCompare());
+//		//将排好序的每个pair中的first放入ret中
+//		vector<string> ret;
+//		for (size_t i = 0; i < k; i++)
+//		{
+//			ret.push_back(v[i]->first);
+//		}
+//		return ret;
+//	}
+//};
+
+//KY264 单词识别
+//#include<iostream>
+//#include<string>
+//#include<map>
+//using namespace std;
+//int main()
 //{
-//	Node* subL = parent->left;
-//	Node* subLR = subL->right;
-//
-//	parent->left = subLR;
-//	if (subLR)
-//		subLR->_parent = parent;
-//
-//	Node* ppNode = parent->parent;
-//	subL->right = parent;
-//	parent->_parent = subL;
-//
-//	if (parent == _root)
+//	string str;
+//	map<string, int> mp;
+//	while (getline(cin, str))
 //	{
-//		subL->_parent = nullptr;
-//		_root = subL;
-//	}
-//	else
-//	{
-//		subL->_parent = ppNode;
-//		if (ppNode->right == parent)
+//		int slow = 0;   //单词的起始下标
+//		string s;       //存放单个单词
+//		for (int i = 0; i < str.size(); i++)
 //		{
-//			ppNode->right = subL;
+//			//大写变小写
+//			if ('A' <= str[i] && str[i] <= 'Z')
+//			{
+//				str[i] += 32;
+//			}
+//			//取单词放入mp中，插入+计数+自动降序排序
+//			if (str[i] == ' ' || str[i] == '.')
+//			{
+//				int num = i - slow;     //单词大小
+//				s = str.substr(slow, num);  //通过单词起始下标和大小取出来
+//				mp[s]++;
+//				slow = i + 1;  //跳过空格到下一个单词的起始位置
+//			}
 //		}
-//		else
+//
+//		//上述已经按字典序排好了---下面将次数大的放在前面
+//		//注意次数出现相等，防止去重，要用multimap
+//		//手动更改为降序
+//		multimap<int, string, greater<int>> intsort;
+//		for (const auto& e : mp)
 //		{
-//			ppNode->left = subL;
+//			//插入+排序
+//			intsort.insert(make_pair(e.second, e.first));
 //		}
+//
+//		for (const auto& e : intsort)
+//		{
+//			cout << e.second << ":" << e.first << endl;
+//		}
+//
 //	}
-//	parent->_bf = subL->_bf = 0;
+//	return 0;
 //}
