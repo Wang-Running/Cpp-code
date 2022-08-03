@@ -197,7 +197,7 @@ void test8()
 	m.insert(make_pair(3, "c"));
 }
 
-//find 插计数
+//find 插入计数
 void test9()
 {
 	//将以下数据插入map中，并且计数
@@ -233,7 +233,6 @@ void test10()
 	map<string, int> m;
 	for (auto& str : arr)
 	{
-		//insert返回的是key_type（即pair的第一个数据）的迭代器
 		auto ret = m.insert(make_pair(str, 1));
 		if (ret.second == false)
 		{
@@ -249,7 +248,7 @@ void test10()
 	}
 }
 
-//
+//[] 插入+计数
 void test11()
 {
 	//将以下数据插入map中，并且计数
@@ -257,12 +256,7 @@ void test11()
 	map<string, int> m;
 	for (auto& str : arr)
 	{
-		//insert返回的是key_type（即pair的第一个数据）的迭代器
-		auto ret = m.insert(make_pair(str, 1));
-		if (ret.second == false)
-		{
-			ret.first->second++;
-		}
+		m[str]++;
 	}
 	//遍历
 	auto it = m.begin();
@@ -272,6 +266,9 @@ void test11()
 		it++;
 	}
 }
+
+
+
 int main()
 {
 	test11();
